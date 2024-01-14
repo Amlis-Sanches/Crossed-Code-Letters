@@ -1,0 +1,57 @@
+from PIL import Image, ImageDraw, ImageFont
+
+# Function to create a blank image with a specified size and background color
+def create_blank_image(width, height, background_color):
+    return Image.new("RGB", (width, height), background_color)
+
+# Function to add a bold, rotated letter to the image
+def add_bold_rotated_letter(image, letter, font_size, font_path, text_color):
+    # Create a drawing context
+    draw = ImageDraw.Draw(image)
+
+    # Load a bold font
+    font = ImageFont.truetype(font_path, font_size)
+
+    # Measure the size of the letter
+    letter_width, letter_height = draw.textsize(letter, font)
+
+    # Calculate the position to center the letter
+    x = (image.width - letter_width) / 2
+    y = (image.height - letter_height) / 2
+
+    # Draw the rotated letter on the image
+    draw.text((x, y), letter, font=font, fill=text_color)
+
+    # Rotate the image by 90 degrees
+    image = image.rotate(90, expand=True)
+
+    return image
+
+# Main function
+def main():
+    # Image settings
+    image_width = 400
+    image_height = 400
+    background_color = "white"
+    text_color = "black"
+
+    # Create a blank image
+    image = create_blank_image(image_width, image_height, background_color)
+
+    # Letters to combine
+    letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+    # Font settings
+    font_size = 100
+    font_path = "path_to_bold_font.ttf"  # Replace with the path to a bold font file
+
+    # Loop through pairs of letters and add them to the image
+    for i in range(0, len(letters), 2):
+        letter_pair = letters[i:i+2]
+        image = add_bold_rotated_letter(image, letter_pair, font_size, font_path, text_color)
+
+    # Save the generated image
+    image.save("combined_letters.png")
+
+if __name__ == "__main__":
+    main()
