@@ -33,6 +33,45 @@ import PyPDF2
 import math
 from PIL import Image, ImageDraw, ImageFont, ImageChops
 
+'''
+Main function to handle the workflow.
+
+
+Here i will recieve the text varables in a list and then pass them through the generate_crossed_letter function. 
+'''
+def main():
+    # Get file path and type from user
+    # Validate filetype and if wrong file type is entered, ask again
+    while True:
+        file_path = input("Enter the file path: ")
+        file_type = input("Enter the file type (text/word/pdf): ")
+        if file_type in ["text", "word", "pdf"]:
+            #try to confirm and extract text from file
+            text = extract_text(file_path, file_type)
+            if text == "Error":
+                print("File Error extracting text. Please try again.")
+            else:
+                break
+        elif file_type == "exit":
+            print("Good Bye!")
+            exit()
+        else:
+            print("Invalid file type. Please try again.")
+    '''
+    clean text for generation and return two lists filled with the text string variables.
+    I create the list inside the function because I want to have everything formed befor 
+    I pass it to the generate_crossed_letter function.
+    '''
+    blue_list, red_list, num_of_images = text_clean(text)
+
+    # Generate crossed letter
+    for i in range(num_of_images):
+        print(blue_list[i], "\n", "\n", red_list[i])
+        generate_crossed_letter(blue_list[i], red_list[i], i)
+    
+    print("Crossed Letter Generated!")
+
+
 # Function to extract text from various formats
 def extract_text(file_path, file_type):
     # Identify file type. If text, return text
@@ -174,45 +213,6 @@ def generate_crossed_letter(text1, text2, num_of_images):
 
     # Save the result
     blended.save('blended_' + str(num_of_images) + '.png')
-
-
-'''
-Main function to handle the workflow.
-
-
-Here i will recieve the text varables in a list and then pass them through the generate_crossed_letter function. 
-'''
-def main():
-    # Get file path and type from user
-    # Validate filetype and if wrong file type is entered, ask again
-    while True:
-        file_path = input("Enter the file path: ")
-        file_type = input("Enter the file type (text/word/pdf): ")
-        if file_type in ["text", "word", "pdf"]:
-            #try to confirm and extract text from file
-            text = extract_text(file_path, file_type)
-            if text == "Error":
-                print("File Error extracting text. Please try again.")
-            else:
-                break
-        elif file_type == "exit":
-            print("Good Bye!")
-            exit()
-        else:
-            print("Invalid file type. Please try again.")
-    '''
-    clean text for generation and return two lists filled with the text string variables.
-    I create the list inside the function because I want to have everything formed befor 
-    I pass it to the generate_crossed_letter function.
-    '''
-    blue_list, red_list, num_of_images = text_clean(text)
-
-    # Generate crossed letter
-    for i in range(num_of_images):
-        print(blue_list[i], "\n", "\n", red_list[i])
-        generate_crossed_letter(blue_list[i], red_list[i], i)
-    
-    print("Crossed Letter Generated!")
 
 if __name__ == "__main__":
     main()
