@@ -37,7 +37,7 @@ def main():
     # Create a blank image
     image = create_blank_image(image_width, image_height, background_color)
 
-    # Letters to combine
+    # Letters list
     letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
     # Font size for default font
@@ -50,15 +50,14 @@ def main():
     color_index = 0
 
     # Loop through pairs of letters and add them to the image with alternating colors
-    for i in range(0, len(letters), 2):
-        for j in range(0, len(letters), 2):
-            letter_pair = letters[i:j]
+    for i in range(len(letters)):
+        for j in range(i+1, len(letters)):
+            letter_pair = letters[i] + letters[j]
             text_color = colors[color_index % 2]
             image = add_bold_rotated_letter(image, letter_pair, font_size, text_color)
             color_index += 1
+            image.save(fr"C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\Symbols Images\combined_letters{letters[i]}{letters[j]}.png")
 
-    # Save the generated image
-    image.save("combined_letters.png")
 
 if __name__ == "__main__":
     main()
