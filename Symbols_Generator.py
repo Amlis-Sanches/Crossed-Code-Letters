@@ -1,32 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont, ImageChops
 
-# Function to create a blank image with a specified size and background color
-def create_blank_image(width, height, background_color):
-    return Image.new("RGB", (width, height), background_color)
-
-# Function to add a bold, rotated letter to the image with specified text color
-def add_bold_rotated_letter(image, letter, font_size, text_color):
-    # Create a drawing context
-    draw = ImageDraw.Draw(image)
-
-    # Load a default bold font (you can change this if needed)
-    font = ImageFont.load_default()
-
-    # Measure the size of the letter
-    letter_width, letter_height = draw.textsize(letter, font)
-
-    # Calculate the position to center the letter
-    x = (image.width - letter_width) / 2
-    y = (image.height - letter_height) / 2
-
-    # Draw the rotated letter on the image with the specified text color
-    draw.text((x, y), letter, font=font, fill=text_color)
-
-    # Rotate the image by 90 degrees
-    image = image.rotate(90, expand=True)
-
-    return image
-
 # Main function
 def main():
     # Image settings
@@ -69,7 +42,6 @@ def main():
 
             # Save the image
             img.save(fr"C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\Symbols Images\combined_letters{letterB}{letterR}.png")
-
 
 if __name__ == "__main__":
     main()
