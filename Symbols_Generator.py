@@ -49,16 +49,22 @@ def image_gen(image_width, image_height, letterB, letterR, font, PB = False, PR 
     # Merge the two images
     img = ImageChops.add(img1, img2)
 
-    match PB and PR:
+    # Create a draw object for the merged image
+    draw = ImageDraw.Draw(img)
+
+    match (PB, PR):
         case (True, True):
-            pass
+            draw.text((image_width-2, center_y), '.', fill=(0, 0, 0), font=font)
+            draw.text((center_x, image_height-2), '.', fill=(0, 0, 0), font=font)
+            return img
         case (True, False):
-            pass
+            draw.text((image_width-2, center_y), '.', fill=(0, 0, 0), font=font)
+            return img
         case (False, True):
-            pass
+            draw.text((center_x, image_height-2), '.', fill=(0, 0, 0), font=font)
+            return img
         case _:
             return img
-
 
 if __name__ == "__main__":
     main()
