@@ -11,12 +11,12 @@ def main():
 
     for letterB in letters:
         for letterR in letters:
-            img = image_gen(image_width, image_height, letterB, letterR, font)
+            for b_suffix in [False, True]:
+                for r_suffix in [False, True]:
+                    img = image_gen(image_width, image_height, letterB, letterR, font, b_suffix, r_suffix)
+                    img.save(fr"C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\Symbols Images\combined_letters{letterB}{letterR}{b_suffix}{r_suffix}.png")
 
-            # Save the image
-            img.save(fr"C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\Symbols Images\combined_letters{letterB}{letterR}.png")
-
-def image_gen(image_width, image_height, letterB, letterR, font):
+def image_gen(image_width, image_height, letterB, letterR, font, PB = False, PR = False):
     '''
     Create a two new images with the right size and a white background.
     The first image will be where the letters are drawn on while the
@@ -49,7 +49,15 @@ def image_gen(image_width, image_height, letterB, letterR, font):
     # Merge the two images
     img = ImageChops.add(img1, img2)
 
-    return img
+    match PB and PR:
+        case (True, True):
+            pass
+        case (True, False):
+            pass
+        case (False, True):
+            pass
+        case _:
+            return img
 
 
 if __name__ == "__main__":
