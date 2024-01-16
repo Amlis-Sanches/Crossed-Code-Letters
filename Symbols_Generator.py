@@ -49,22 +49,27 @@ def image_gen(image_width, image_height, letterB, letterR, font, PB = False, PR 
     # Merge the two images
     img = ImageChops.add(img1, img2)
 
+
     # Create a draw object for the merged image
     draw = ImageDraw.Draw(img)
+    dot_radius = 1  # Adjust as needed
 
     match (PB, PR):
         case (True, True):
-            draw.text((image_width-2, center_y), '.', fill=(0, 0, 0), font=font)
-            draw.text((center_x, image_height-2), '.', fill=(0, 0, 0), font=font)
-            return img
-        case (True, False):
-            draw.text((image_width-2, center_y), '.', fill=(0, 0, 0), font=font)
-            return img
-        case (False, True):
-            draw.text((center_x, image_height-2), '.', fill=(0, 0, 0), font=font)
-            return img
-        case _:
-            return img
+            # Draw a dot at (image_width, center_y)
+            draw.ellipse([(image_width-dot_radius, center_y-dot_radius), (image_width+dot_radius, center_y+dot_radius)], fill=(0, 0, 0))
 
+            # Draw a dot at (center_x, image_height)
+            draw.ellipse([(center_x-dot_radius, image_height-dot_radius), (center_x+dot_radius, image_height+dot_radius)], fill=(0, 0, 0))
+
+        case (True, False):
+            # Draw a dot at (image_width, center_y)
+            draw.ellipse([(image_width-dot_radius, center_y-dot_radius), (image_width+dot_radius, center_y+dot_radius)], fill=(0, 0, 0))
+
+        case (False, True):
+            # Draw a dot at (center_x, image_height)
+            draw.ellipse([(center_x-dot_radius, image_height-dot_radius), (center_x+dot_radius, image_height+dot_radius)], fill=(0, 0, 0))
+        
+    return img
 if __name__ == "__main__":
     main()
