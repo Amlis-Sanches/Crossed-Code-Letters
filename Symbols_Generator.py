@@ -50,26 +50,36 @@ def image_gen(image_width, image_height, letterB, letterR, font, PB = False, PR 
     img = ImageChops.add(img1, img2)
 
 
-    # Create a draw object for the merged image
-    draw = ImageDraw.Draw(img)
-    dot_radius = 1  # Adjust as needed
+    '''
+    This is generating a set of symbols for what you would use at the
+    end of a word. If the PB and PR are both False, then it will just
+    exit the loop. If PB is True, then it will draw a dot at the end.
+    This dot will signify if this is the end of a word for the top
+    row or bottom row.
+    '''
+    if PB and PR == False:
+        return img
+    else:
+        draw = ImageDraw.Draw(img)
+        dot_radius = 1  # Adjust as needed
 
-    match (PB, PR):
-        case (True, True):
-            # Draw a dot at (image_width, center_y)
-            draw.ellipse([(image_width-dot_radius, center_y-dot_radius), (image_width+dot_radius, center_y+dot_radius)], fill=(0, 0, 0))
+        match (PB, PR):
+            case (True, True):
+                # Draw a dot at (image_width, center_y)
+                draw.ellipse([(image_width-dot_radius, center_y-dot_radius), (image_width+dot_radius, center_y+dot_radius)], fill=(0, 0, 0))
 
-            # Draw a dot at (center_x, image_height)
-            draw.ellipse([(center_x-dot_radius, image_height-dot_radius), (center_x+dot_radius, image_height+dot_radius)], fill=(0, 0, 0))
+                # Draw a dot at (center_x, image_height)
+                draw.ellipse([(center_x-dot_radius, image_height-dot_radius), (center_x+dot_radius, image_height+dot_radius)], fill=(0, 0, 0))
 
-        case (True, False):
-            # Draw a dot at (image_width, center_y)
-            draw.ellipse([(image_width-dot_radius, center_y-dot_radius), (image_width+dot_radius, center_y+dot_radius)], fill=(0, 0, 0))
+            case (True, False):
+                # Draw a dot at (image_width, center_y)
+                draw.ellipse([(image_width-dot_radius, center_y-dot_radius), (image_width+dot_radius, center_y+dot_radius)], fill=(0, 0, 0))
 
-        case (False, True):
-            # Draw a dot at (center_x, image_height)
-            draw.ellipse([(center_x-dot_radius, image_height-dot_radius), (center_x+dot_radius, image_height+dot_radius)], fill=(0, 0, 0))
-        
-    return img
+            case (False, True):
+                # Draw a dot at (center_x, image_height)
+                draw.ellipse([(center_x-dot_radius, image_height-dot_radius), (center_x+dot_radius, image_height+dot_radius)], fill=(0, 0, 0))
+        return img
+
+
 if __name__ == "__main__":
     main()
