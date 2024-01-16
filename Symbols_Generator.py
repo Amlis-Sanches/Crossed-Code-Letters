@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw, ImageFont, ImageChops
 
 # Function to create a blank image with a specified size and background color
 def create_blank_image(width, height, background_color):
@@ -30,33 +30,45 @@ def add_bold_rotated_letter(image, letter, font_size, text_color):
 # Main function
 def main():
     # Image settings
-    image_width = 400
-    image_height = 400
+    image_width = 8
+    image_height = 8
     background_color = "white"
-
-    # Create a blank image
-    image = create_blank_image(image_width, image_height, background_color)
+    font = ImageFont.load_default()
 
     # Letters list
-    letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    letters = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
-    # Font size for default font
-    font_size = 36
+    for letterB in letters:
+        for letterR in letters:
+        # Create a blank image
+            img1 = Image.new('RGB', (image_width, image_height), color = (255, 255, 255)) #for testing
+            img2 = Image.new('RGB', (image_width, image_height), color = (255, 255, 255)) #for testing
+            draw1 = ImageDraw.Draw(img1)
+            draw2 = ImageDraw.Draw(img2)
 
-    # Colors for the letters
-    colors = ["blue", "red"]
+            # Calculate the size of the text
+            text_width, text_height = draw1.textsize(letterB, font=font)
 
-    # Initialize color index
-    color_index = 0
+            # Calculate the position to draw the text
+            center_x = image_width // 2
+            center_y = image_height // 2
+            text_x = center_x - text_width // 2
+            text_y = center_y - text_height // 2
 
-    # Loop through pairs of letters and add them to the image with alternating colors
-    for i in range(len(letters)):
-        for j in range(i+1, len(letters)):
-            letter_pair = letters[i] + letters[j]
-            text_color = colors[color_index % 2]
-            image = add_bold_rotated_letter(image, letter_pair, font_size, text_color)
-            color_index += 1
-            image.save(fr"C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\Symbols Images\combined_letters{letters[i]}{letters[j]}.png")
+            # Draw the text at the calculated position
+            draw1.text((text_x, text_y), letterB, fill=(0, 0, 255), font=font)
+
+            # Rotate the first image
+            img1 = img1.rotate(90, expand=1)
+
+            # Add second layer of text in red
+            draw2.text((text_x, text_y), letterR, fill=(255, 0, 0), font=font)
+
+            # Merge the two images
+            img = ImageChops.add(img1, img2)
+
+            # Save the image
+            img.save(fr"C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\Symbols Images\combined_letters{letterB}{letterR}.png")
 
 
 if __name__ == "__main__":
