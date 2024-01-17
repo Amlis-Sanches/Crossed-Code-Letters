@@ -16,7 +16,7 @@ def main():
                     for b_sentance in [False, True]:
                         for r_sentance in [False, True]:
                             img = image_gen(image_width, image_height, letterB, letterR, font, b_suffix, r_suffix, b_sentance, r_sentance)
-                            img.save(fr"C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\Symbols Images\combined_letters{letterB}{letterR}{b_suffix}{r_suffix}{b_sentance}{r_sentance}.png")
+                            img.save(fr"C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\Symbols Images\{letterB}{letterR}-{b_suffix}{r_suffix}{b_sentance}{r_sentance}.png")
 
 
 def image_gen(image_width, image_height, letterB, letterR, font, PB = False, PR = False, SB = False, SR = False):
@@ -82,18 +82,18 @@ def image_gen(image_width, image_height, letterB, letterR, font, PB = False, PR 
     match (SB, SR):
         case (True, True):
             # Draw a dot at (0, center_y)
-            draw.ellipse([(dot_radius, center_y-dot_radius), (dot_radius*3, center_y+dot_radius)], fill=(0, 0, 0))
+            draw.ellipse([(dot_radius-1, center_y-dot_radius), (dot_radius-1, center_y+dot_radius)], fill=(0, 0, 0))
 
             # Draw a dot at (center_x, 0)
-            draw.ellipse([(center_x-dot_radius, dot_radius), (center_x+dot_radius, dot_radius*3)], fill=(0, 0, 0))
+            draw.ellipse([(center_x-dot_radius, dot_radius-1), (center_x+dot_radius, dot_radius-1)], fill=(0, 0, 0))
 
         case (True, False):
             # Draw a dot at (0, center_y)
-            draw.ellipse([(dot_radius, center_y-dot_radius), (dot_radius*3, center_y+dot_radius)], fill=(0, 0, 0))
+            draw.ellipse([(dot_radius-1, center_y-dot_radius), (dot_radius-1, center_y+dot_radius)], fill=(0, 0, 0))
 
         case (False, True):
             # Draw a dot at (center_x, 0)
-            draw.ellipse([(center_x-dot_radius, dot_radius), (center_x+dot_radius, dot_radius*3)], fill=(0, 0, 0))
+            draw.ellipse([(center_x-dot_radius, dot_radius-1), (center_x+dot_radius, dot_radius-1)], fill=(0, 0, 0))
     
     return img
 
