@@ -1,4 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont, ImageChops
+import os
+
 
 # Main function
 def main():
@@ -15,8 +17,21 @@ def main():
                 for r_suffix in [False, True]:
                     for b_sentance in [False, True]:
                         for r_sentance in [False, True]:
+                            # Define the relative path to the 'Symbols Images' directory
                             img = image_gen(image_width, image_height, letterB, letterR, font, b_suffix, r_suffix, b_sentance, r_sentance)
-                            img.save(fr"C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\Symbols Images\{letterB}{letterR}-{b_suffix}-{r_suffix}-{b_sentance}-{r_sentance}.png")
+                            images_dir = os.path.join('Crossed-Code-Letters', 'Symbols Images')
+
+                            # Make sure the directory exists
+                            os.makedirs(images_dir, exist_ok=True)
+
+                            # Define the filename
+                            filename = f"{letterB}{letterR}-{b_suffix}-{r_suffix}-{b_sentance}-{r_sentance}.png"
+
+                            # Join the directory path and filename
+                            filepath = os.path.join(images_dir, filename)
+
+                            # Save the image
+                            img.save(filepath)
 
 
 def image_gen(image_width, image_height, letterB, letterR, font, PB = False, PR = False, SB = False, SR = False):
