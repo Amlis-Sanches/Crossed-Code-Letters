@@ -16,7 +16,7 @@ def main():
                     for b_sentance in [False, True]:
                         for r_sentance in [False, True]:
                             img = image_gen(image_width, image_height, letterB, letterR, font, b_suffix, r_suffix, b_sentance, r_sentance)
-                            img.save(fr"C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\Symbols Images\{letterB}{letterR}-{b_suffix}{r_suffix}{b_sentance}{r_sentance}.png")
+                            img.save(fr"C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\Symbols Images\{letterB}{letterR}-{b_suffix}-{r_suffix}-{b_sentance}-{r_sentance}.png")
 
 
 def image_gen(image_width, image_height, letterB, letterR, font, PB = False, PR = False, SB = False, SR = False):
