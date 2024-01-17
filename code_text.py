@@ -1,7 +1,6 @@
 
 # Import necessary libraries
 import docx
-import PyPDF2
 import math
 from PIL import Image, ImageDraw, ImageFont, ImageChops
 
@@ -77,6 +76,7 @@ def text_clean(text):
     # Clean text for generation
     cleaned_text = text.replace('\n', '')
     cleaned_text = cleaned_text.replace('\t', '')
+    
     
     # Shape test to fit for the desired image
     for i in range(0, len(cleaned_text), 80):
