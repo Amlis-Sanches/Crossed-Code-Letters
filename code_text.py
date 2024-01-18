@@ -36,8 +36,7 @@ def main():
 
     # Generate crossed letter
     for i in range(num_of_images):
-        print(blue_list[i], "\n", "\n", red_list[i])
-        generate_crossed_letter(blue_list[i], red_list[i], i)
+        combine_letter(blue_list[i], red_list[i], i)
     
     print("Crossed Letter Generated!")
 
@@ -123,9 +122,66 @@ def text_clean(text):
         cleaned_text_lines = cleaned_text_lines[(half_length*2):]
     return blue_list, red_list, total_image
 
-def generate_crossed_letter(text1, text2, num_of_images):
-    coded_df = pd.DataFrame({'blue': list(text1), 'red': list(text2)})
-    print(coded_df)
+def combine_letter(text1, text2, i, j):
+    '''
+    find the combination of letters. If there is a space or a period, then it will be 
+    a word or sentance and it will move onto the next letter.
+    '''
+    match text1[i], text2[i]:
+        case (" ", " "):
+            B_letter = text1[i+1]
+            R_letter = text2[j+1]
+            i, j = i+1, j+1
+        case (".", "."):
+            B_letter = text1[i+1]
+            R_letter = text2[j+1]
+            i, j = i+1, j+1
+        case (" ", _):
+            B_letter = text1[i+1]
+            R_letter = text2[j]
+            i += 1
+        case (".", _):
+            B_letter = text1[i+1]
+            R_letter = text2[j]
+            i += 1
+        case (_, " "):
+            B_letter = text1[i]
+            R_letter = text2[j+1]
+            j += 1
+        case (_, "."):
+            B_letter = text1[i]
+            R_letter = text2[j+1]
+            j += 1
+        case _:
+            B_letter = text1[i]
+            R_letter = text2[j]
+
+    match text1[i+1], text2[i+1]:
+        case (" ", " "):
+            B_word = True
+            R_word = True
+        case (".", "."):
+            b_sentance = True
+            r_sentance = True
+        case (" ", _):
+            B_word = True
+            R_word = False
+        case (".", _):
+            b_sentance = True
+            r_sentance = False
+        case (_, " "):
+            B_word = False
+            R_word = True
+        case (_, "."):
+            b_sentance = False
+            r_sentance = True
+        case _:
+            B_word = False
+            R_word = False
+            b_sentance = False
+            r_sentance = False
+    return B_letter, R_letter, B_word, R_word, b_sentance, r_sentance, i, j
+
 
 
 if __name__ == "__main__":
