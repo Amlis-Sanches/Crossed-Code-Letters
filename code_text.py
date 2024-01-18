@@ -125,9 +125,10 @@ def text_clean(text):
 def combine_letter(text1, text2, i, j):
     '''
     find the combination of letters. If there is a space or a period, then it will be 
-    a word or sentance and it will move onto the next letter.
+    a word or sentance and it will move onto the next letter. We will ignolage all 
+    other characters but may not have a symbol for them.
     '''
-    for character in [".", " "]:
+    for character in [".", " ", ",", "?", "!", ":", ";"]:
         if text1[i] == character and text2[j] == character:
             B_letter = text1[i+1]
             R_letter = text2[j+1]
