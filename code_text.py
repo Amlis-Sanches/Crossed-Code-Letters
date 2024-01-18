@@ -127,32 +127,20 @@ def combine_letter(text1, text2, i, j):
     find the combination of letters. If there is a space or a period, then it will be 
     a word or sentance and it will move onto the next letter.
     '''
-    match text1[i], text2[i]:
-        case (" ", " "):
+    for character in [".", " "]:
+        if text1[i] == character and text2[j] == character:
             B_letter = text1[i+1]
             R_letter = text2[j+1]
             i, j = i+1, j+1
-        case (".", "."):
-            B_letter = text1[i+1]
-            R_letter = text2[j+1]
-            i, j = i+1, j+1
-        case (" ", _):
+        elif text1[i] == character and text2[j] != character:
             B_letter = text1[i+1]
             R_letter = text2[j]
-            i += 1
-        case (".", _):
-            B_letter = text1[i+1]
-            R_letter = text2[j]
-            i += 1
-        case (_, " "):
+            i = i+1
+        elif text1[i] != character and text2[j] == character:
             B_letter = text1[i]
             R_letter = text2[j+1]
-            j += 1
-        case (_, "."):
-            B_letter = text1[i]
-            R_letter = text2[j+1]
-            j += 1
-        case _:
+            j = j+1
+        else:
             B_letter = text1[i]
             R_letter = text2[j]
 
