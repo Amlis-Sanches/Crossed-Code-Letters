@@ -2,6 +2,7 @@
 # Import necessary libraries
 import docx
 import math
+import pandas as pd
 from PIL import Image, ImageDraw, ImageFont, ImageChops
 
 '''
@@ -123,7 +124,9 @@ def text_clean(text):
     return blue_list, red_list, total_image
 
 def generate_crossed_letter(text1, text2, num_of_images):
-    pass
+    coded_df = pd.DataFrame({'blue': list(text1), 'red': list(text2)})
+    print(coded_df)
+
 
 if __name__ == "__main__":
     main()
