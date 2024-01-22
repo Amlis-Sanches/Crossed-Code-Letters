@@ -145,6 +145,10 @@ def combine_letter(text1, text2, i, j):
             B_letter = text1[i]
             R_letter = text2[j]
 
+    '''
+    Unique characters in a scentance will have a different symbol list.
+    '''
+
     for character in [" ", ",", ";", "-", "'", '"', "_"]:
         if text1[i] == character and text2[j] == character:
             B_word = True
@@ -161,6 +165,10 @@ def combine_letter(text1, text2, i, j):
         else:
             B_word = False
             R_word = False
+
+    '''
+    Create a sybmol identification for scentences. Identifying characters that end a sentance.
+    '''
 
     for character in [".", "?", "!"]:
         if text1[i] == character and text2[j] == character:
