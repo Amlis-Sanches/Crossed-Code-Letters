@@ -8,7 +8,7 @@ def main():
     image_width, image_height = 8, 8
     font = ImageFont.load_default()
 
-    # Letters list
+    # Letters list to iterate through every letter of the alphabet.
     letters = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
     for letterB in letters:
