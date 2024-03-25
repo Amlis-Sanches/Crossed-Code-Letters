@@ -2,6 +2,7 @@ import math
 import docx
 import re
 import num2words
+import sys
 
 def main():
     file_path = 'C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\File Examples\Story_example.txt'
@@ -44,7 +45,7 @@ def text_clean(text):
         text = text.replace(char, '')
 
 
-    # Shape test to fit for the desired image
+    #using the determined number of characters, insert a new line after that character. 
     for i in range(0, len(cleaned_text), 80):
         if i + 1 < len(cleaned_text):  # Ensure i+1 is a valid index
             if cleaned_text[i] in ' .,?!:;':
@@ -86,3 +87,19 @@ def text_clean(text):
             counter += 1
         cleaned_text_lines = cleaned_text_lines[(half_length*2):]
     return blue_list, red_list, total_image
+
+def countchar (text, maxchar, charlist = [' ','.']):
+    
+    for char in range(maxchar):
+        character = text[char]
+        if character.isalpha():
+            count += 1
+        elif character in charlist:
+            count = count
+        elif character.isnumeric():
+            print(f'Error the {char} was identified as a number: {character}')
+            sys.exit()
+        else:
+            print(f"{character} is not identified as a posible character to analyze. \n please remove character at position {char}")
+
+    return count
