@@ -25,6 +25,8 @@ The image will have the first set of text running left to right in blue, and the
 set of text running top to bottom in red. Where the texts overlap, the colors will blend
 to create purple.
 
+Creating new branch to modify the code to be seperate and better. 
+
 '''
 
 # Import necessary libraries
