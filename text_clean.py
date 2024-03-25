@@ -89,8 +89,12 @@ def text_clean(text):
     return blue_list, red_list, total_image
 
 def countchar (text, maxchar, charlist = [' ','.']):
+    if len(text)<maxchar:
+        max = len(text)
+    else:
+        max = maxchar
     
-    for char in range(maxchar):
+    for char in range(max):
         character = text[char]
         if character.isalpha():
             count += 1
