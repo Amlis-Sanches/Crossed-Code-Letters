@@ -49,14 +49,10 @@ def text_clean(text):
         if i + 1 < len(cleaned_text):  # Ensure i+1 is a valid index
             if cleaned_text[i] in ' .,?!:;':
                 cleaned_text = cleaned_text[:i] + '\n' + cleaned_text[i:]
-            elif (cleaned_text[i].isalpha() or cleaned_text[i] == "'") and cleaned_text[i+1] in " .,?!:;'":
+            elif cleaned_text[i].isalpha() and cleaned_text[i+1] in " .,?!:;":
                 cleaned_text = cleaned_text[:i+1] + '\n' + cleaned_text[i+1:]
-            elif (cleaned_text[i].isalpha() or cleaned_text[i] == "'") and (cleaned_text[i].isalpha() or cleaned_text[i] == "'"):
-                for j in range(i, max(0, i-80), -1):  # Iterate backwards from i
-                    if cleaned_text[j] == ' ':
-                        cleaned_text = cleaned_text[:j] + '\n' + cleaned_text[j+1:]
-                        i = i-j
-                        break  # Exit the loop once a space is found
+            else:
+                cleaned_text = cleaned_text[:i] + '\n' + cleaned_text[i:]
 
 
     # Check if the last line is longer than 80 characters
