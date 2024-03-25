@@ -1,6 +1,7 @@
 import math
 import docx
 import re
+import num2words
 
 def main():
     file_path = 'C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\File Examples\Story_example.txt'
@@ -17,7 +18,7 @@ def extract_text(file_path):
             case "txt":
                 with open(file_path, "r") as file:
                     text = file.read()
-                    
+
             case "docx":
                 doc = docx.Document(file_path)
                 full_text = []
@@ -33,11 +34,16 @@ def extract_text(file_path):
     return text
 
 def text_clean(text):
-    # Clean text for generation
-    cleaned_text = text.replace('\n', '')
-    cleaned_text = cleaned_text.replace('\t', '')
-    
-    
+    # Convert all numbers into words. Do this first to reduce glitches
+    text = re.sub(r'\b\d+\b', lambda x: num2words(int(x.group())), text)
+
+
+    # remove all new lines and tabs
+    char_list = ['\n', '\t', '\r', '"', '“', '”', '‘', '’', "'"] # List of characters to remove
+    for char in char_list:
+        text = text.replace(char, '')
+
+
     # Shape test to fit for the desired image
     for i in range(0, len(cleaned_text), 80):
         if i + 1 < len(cleaned_text):  # Ensure i+1 is a valid index
@@ -51,6 +57,7 @@ def text_clean(text):
                         cleaned_text = cleaned_text[:j] + '\n' + cleaned_text[j+1:]
                         i = i-j
                         break  # Exit the loop once a space is found
+
 
     # Check if the last line is longer than 80 characters
     last_newline = cleaned_text.rfind('\n')
@@ -67,10 +74,12 @@ def text_clean(text):
     half_length = 30 #Set to a specific number to fit the desired image
     total_image = round(total_lines // (half_length * 2))
 
+
     #create a red and blue list to hold the text
     total_image = math.ceil(total_lines / (half_length * 2))
     blue_list = [''] * total_image
     red_list = [''] * total_image
+
 
     cleaned_text_lines = cleaned_text.split('\n')
     counter = 0
