@@ -93,8 +93,9 @@ def countchar (text, maxchar, charlist = [' ','.']):
         max = len(text)
     else:
         max = maxchar
-    
-    for char in range(max):
+        
+    char = 0
+    while char != maxchar:
         character = text[char]
         if character.isalpha():
             count += 1
