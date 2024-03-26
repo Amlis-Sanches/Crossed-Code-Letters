@@ -1,4 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont, ImageChops
+import os
+
 
 # Main function
 def main():
@@ -6,17 +8,33 @@ def main():
     image_width, image_height = 8, 8
     font = ImageFont.load_default()
 
-    # Letters list
+    # Letters list to iterate through every letter of the alphabet.
     letters = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
     for letterB in letters:
         for letterR in letters:
             for b_suffix in [False, True]:
                 for r_suffix in [False, True]:
-                    img = image_gen(image_width, image_height, letterB, letterR, font, b_suffix, r_suffix)
-                    img.save(fr"C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\Symbols Images\combined_letters{letterB}{letterR}{b_suffix}{r_suffix}.png")
+                    for b_sentance in [False, True]:
+                        for r_sentance in [False, True]:
+                            # Define the relative path to the 'Symbols Images' directory
+                            img = image_gen(image_width, image_height, letterB, letterR, font, b_suffix, r_suffix, b_sentance, r_sentance)
+                            images_dir = os.path.join('Crossed-Code-Letters', 'Symbols Images')
 
-def image_gen(image_width, image_height, letterB, letterR, font, PB = False, PR = False):
+                            # Make sure the directory exists
+                            os.makedirs(images_dir, exist_ok=True)
+
+                            # Define the filename
+                            filename = f"{letterB}{letterR}-{b_suffix}-{r_suffix}-{b_sentance}-{r_sentance}.png"
+
+                            # Join the directory path and filename
+                            filepath = os.path.join(images_dir, filename)
+
+                            # Save the image
+                            img.save(filepath)
+
+
+def image_gen(image_width, image_height, letterB, letterR, font, PB = False, PR = False, SB = False, SR = False):
     '''
     Create a two new images with the right size and a white background.
     The first image will be where the letters are drawn on while the
@@ -50,7 +68,13 @@ def image_gen(image_width, image_height, letterB, letterR, font, PB = False, PR 
     img = ImageChops.add(img1, img2)
 
 
-    # Create a draw object for the merged image
+    '''
+    This is generating a set of symbols for what you would use at the
+    end of a word. If the PB and PR are both False, then it will just
+    exit the loop. If PB is True, then it will draw a dot at the end.
+    This dot will signify if this is the end of a word for the top
+    row or bottom row.
+    '''
     draw = ImageDraw.Draw(img)
     dot_radius = 1  # Adjust as needed
 
@@ -69,7 +93,25 @@ def image_gen(image_width, image_height, letterB, letterR, font, PB = False, PR 
         case (False, True):
             # Draw a dot at (center_x, image_height)
             draw.ellipse([(center_x-dot_radius, image_height-dot_radius), (center_x+dot_radius, image_height+dot_radius)], fill=(0, 0, 0))
-        
+
+    match (SB, SR):
+        case (True, True):
+            # Draw a dot at (0, center_y)
+            draw.ellipse([(dot_radius-1, center_y-dot_radius), (dot_radius-1, center_y+dot_radius)], fill=(0, 0, 0))
+
+            # Draw a dot at (center_x, 0)
+            draw.ellipse([(center_x-dot_radius, dot_radius-1), (center_x+dot_radius, dot_radius-1)], fill=(0, 0, 0))
+
+        case (True, False):
+            # Draw a dot at (0, center_y)
+            draw.ellipse([(dot_radius-1, center_y-dot_radius), (dot_radius-1, center_y+dot_radius)], fill=(0, 0, 0))
+
+        case (False, True):
+            # Draw a dot at (center_x, 0)
+            draw.ellipse([(center_x-dot_radius, dot_radius-1), (center_x+dot_radius, dot_radius-1)], fill=(0, 0, 0))
+    
     return img
+
+
 if __name__ == "__main__":
     main()
