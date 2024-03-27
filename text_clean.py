@@ -54,7 +54,7 @@ import pandas as pd
 
 
 def main():
-    file_path = 'C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\File Examples\Story_example.txt'
+    file_path = r'C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\File Examples\Story_example.txt'
     text = extract_text(file_path)
     blue_list, red_list, num_of_images = text_clean(text)
 
