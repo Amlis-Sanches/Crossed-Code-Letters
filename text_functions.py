@@ -166,12 +166,13 @@ keep the other charicters that i need to identify where a dot is placed.
 """
 
 
-def countchar(text, maxchar, charlist=[" ", "."]):
+def countchar(text, maxchar, charlist=[" ", ".","?"]):
     if len(text) < maxchar:
         max = len(text)
     else:
         max = maxchar
 
+    count = 0
     char = 0
     while char != maxchar:
         character = text[char]
