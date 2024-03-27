@@ -111,6 +111,7 @@ def text_clean(text):
     location = countchar(cleaned_text, 80)
     # using the determined number of characters, insert a new line after that character.
     for i in range(0, len(cleaned_text), location):
+        # rest of your code
         location = countchar(cleaned_text, 80)
         grouptext = cleaned_text[:i] + "\n" + cleaned_text[i:]
 
