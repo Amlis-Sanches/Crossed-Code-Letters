@@ -175,17 +175,22 @@ def countchar(text, maxchar, charlist=[" ", ".","?"]):
     count = 0
     char = 0
     while char != maxchar:
-        character = text[char]
-        if character.isalpha():
-            count += 1
-        elif character in charlist:
-            count = count
-        elif character.isnumeric():
-            print(f"Error the {char} was identified as a number: {character}")
-            sys.exit()
-        else:
-            print(
-                f"{character} is not identified as a posible character to analyze. \n please remove character at position {char}"
-            )
+        for i in range(len(text)):    
+            character = text[i]
+            if character.isalpha():
+                count += 1
+                char += 1
+            elif character in charlist:
+                count += 1 #but no increase in char
+            elif character.isnumeric():
+                print(f"Error the {char} was identified as a number: {character}")
+                return False
+            elif char == len(text):
+                return
+            else:
+                print(
+                    f"{character} is not identified as a posible character to analyze. \n please remove character at position {char}"
+                )
+                return False
 
     return count
