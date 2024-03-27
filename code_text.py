@@ -4,26 +4,16 @@ import docx
 import math
 import pandas as pd
 from PIL import Image, ImageDraw, ImageFont, ImageChops
-from text_clean import text_clean, extract_text
+from text_functions import text_clean, extract_text
 
 '''
 Main function to handle the workflow.
 '''
 
 def main():
-    # Get file path and type from user
-    # Validate filetype and if wrong file type is entered, ask again
-    file_path = input("Enter the file path: ")
-    #try to confirm and extract text from file
-    text = extract_text(file_path)
-        
-        
-    '''
-    clean text for generation and return two lists filled with the text string variables.
-    I create the list inside the function because I want to have everything formed befor 
-    I pass it to the generate_crossed_letter function.
-    '''
-    blue_list, red_list, num_of_images = text_clean(text)
+    file_path = input("Enter the file path: ") #get file path from user
+    text = extract_text(file_path) #use extraction function from the text_clean
+    blue_list, red_list, num_of_images = text_clean(text) #
 
     # Generate crossed letter
     for i in range(num_of_images):
