@@ -40,13 +40,17 @@ def text_clean(text):
 
 
     # remove all new lines and tabs
-    char_list = ['\n', '\t', '\r', '"', '“', '”', '‘', '’', "'"] # List of characters to remove
+    char_list = ['\n', '\t', '\r', '"', '“', '”', '‘', '’', "'", ';', ':'] # List of characters to remove
     for char in char_list:
-        text = text.replace(char, '')
+        cleaned_text = text.replace(char, '')
 
-
+    location = countchar(cleaned_text, 80)
     #using the determined number of characters, insert a new line after that character. 
-    for i in range(0, len(cleaned_text), 80):
+    for i in range(0, len(cleaned_text), location):
+        location = countchar(cleaned_text, 80)
+        grouptext = cleaned_text[:i] + '\n' + cleaned_text[i:]
+        
+        ''' Removed from code since this is fixed with the function countchar
         if i + 1 < len(cleaned_text):  # Ensure i+1 is a valid index
             if cleaned_text[i] in ' .,?!:;':
                 cleaned_text = cleaned_text[:i] + '\n' + cleaned_text[i:]
@@ -54,8 +58,9 @@ def text_clean(text):
                 cleaned_text = cleaned_text[:i+1] + '\n' + cleaned_text[i+1:]
             else:
                 cleaned_text = cleaned_text[:i] + '\n' + cleaned_text[i:]
-
-
+        '''
+    
+    ''' Can remove since the length of 80 count is needed since we identify alphanumeric caracters
     # Check if the last line is longer than 80 characters
     last_newline = cleaned_text.rfind('\n')
     if len(cleaned_text) - last_newline > 80:
@@ -63,6 +68,7 @@ def text_clean(text):
             if cleaned_text[j] == ' ':
                 cleaned_text = cleaned_text[:j] + '\n' + cleaned_text[j+1:]
                 break  # Exit the loop once a space is found
+    '''
 
 
     # Count the total number of lines and determine how many images will be processed
@@ -88,12 +94,18 @@ def text_clean(text):
         cleaned_text_lines = cleaned_text_lines[(half_length*2):]
     return blue_list, red_list, total_image
 
+
+'''
+This function counts the number of characters that are alphanumeric and excludes veryhting else. 
+The reason for this is so i can remove the if statement of when to add a new line and here i can
+keep the other charicters that i need to identify where a dot is placed. 
+'''
 def countchar (text, maxchar, charlist = [' ','.']):
     if len(text)<maxchar:
         max = len(text)
     else:
         max = maxchar
-        
+
     char = 0
     while char != maxchar:
         character = text[char]
