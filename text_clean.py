@@ -78,9 +78,11 @@ def extract_text(file_path):
                 text = "\n".join(full_text)
 
             case _:
-                text = "Program Error, unadentified document type. Please try again."
+                print("Program Error, unadentified document type. Please try again.")
+                sys.exit()
     except:
-        text = "Error! Document not identified. Please try again."
+        print("Error! Document unable to be processed")
+        sys.exit()
     # return just a string with all the text from the file
     return text
 

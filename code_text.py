@@ -13,21 +13,11 @@ Main function to handle the workflow.
 def main():
     # Get file path and type from user
     # Validate filetype and if wrong file type is entered, ask again
-    while True:
-        file_path = input("Enter the file path: ")
-        file_type = input("Enter the file type (text/word): ")
-        if file_type in ["text", "word", "pdf"]:
-            #try to confirm and extract text from file
-            text = extract_text(file_path, file_type)
-            if text == "Error":
-                print("File Error extracting text. Please try again.")
-            else:
-                break
-        elif file_type == "exit":
-            print("Good Bye!")
-            exit()
-        else:
-            print("Invalid file type. Please try again.")
+    file_path = input("Enter the file path: ")
+    #try to confirm and extract text from file
+    text = extract_text(file_path)
+        
+        
     '''
     clean text for generation and return two lists filled with the text string variables.
     I create the list inside the function because I want to have everything formed befor 
