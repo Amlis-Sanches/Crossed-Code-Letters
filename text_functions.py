@@ -53,7 +53,7 @@ import sys
 import pandas as pd
 
 
-def main():
+def main(): #used for testing this code on its own. 
     file_path = r"C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\File Examples\Story_example.txt"
     text = extract_text(file_path)
     text = clean_text(text)
@@ -122,9 +122,11 @@ def clean_text(text):
         text = text.replace(char, "")
     
     '''
-    this is to review all the numbers in the string and change them to numbers. If a number is larger than 1 character long
+    this is to review all the numbers and unique symbols in the string and change them to numbers. If a number is larger than 1 character long
     it will be able to identify what number it is. 
     '''
+
+    #create a dic to replace symbols with the word
     replace_dic = {
         '%':'percent',
         '&':'and',
