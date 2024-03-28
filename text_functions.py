@@ -88,12 +88,34 @@ def extract_text(file_path):
     return text
 
 
-def text_clean(text):
-    # remove all new lines and tabs
+def clean_text(text):
     char_list = [
-        "\n",
-        "\t",
-        "\r",
+        ",",
+        ".",
+        "?",
+        "!",
+        "-",
+        "_",
+        "(",
+        ")",
+        "[",
+        "]",
+        "{",
+        "}",
+        "/",
+        "\\",
+        "&",
+        "*",
+        "#",
+        "@",
+        "^",
+        "%",
+        "$",
+        "<",
+        ">",
+        "|",
+        "+",
+        "=",
         '"',
         "“",
         "”",
@@ -104,21 +126,22 @@ def text_clean(text):
         ":",
     ]  # List of characters to remove
     for char in char_list:
-        cleaned_text = text.replace(char, "")
+        text = text.replace(char, "")
 
-    for i in range(len(text_clean)):
-        if text_clean[i].isnumeric():
-            j = i + 1
-            for j in range(len(text_clean)):
-                if j == (i + 1) and text_clean[j].isalpha():
-                    word = num2words(text_clean[i])
-                    cleaned_text = replace_char_with_string(text_clean, i, i+1, word)
-                elif text_clean[j].isalpha():
-                    number = text_clean[i:j-1]
-                    word = num2words(number)
-                    cleaned_text = replace_char_with_string(text_clean, i, j, word)
+    i = 0
+    while i < len(text):
+        if text[i].isdigit():
+            j = i
+            while j < len(text) and text[j].isdigit():
+                j += 1
+            number = int(text[i:j])
+            word = num2words(number)
+            text = text[:i] + word + text[j:]
+            i += len(word)
+        else:
+            i += 1
 
-    return cleaned_text
+    return text
 
 
 def group_text(text):
