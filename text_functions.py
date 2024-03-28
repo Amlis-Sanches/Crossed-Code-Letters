@@ -54,7 +54,7 @@ import pandas as pd
 
 
 def main():
-    file_path = r'C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\File Examples\Story_example.txt'
+    file_path = r"C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\File Examples\Story_example.txt"
     text = extract_text(file_path)
     text = clean_text(text)
     blue_list, red_list, num_of_images = group_text(text)
@@ -78,15 +78,14 @@ def extract_text(file_path):
         else:
             return False
     except FileNotFoundError:
-        return 'File not found'
+        return "File not found"
     except Exception as e:
-        return f'Extraction did not work: {str(e)}'
+        return f"Extraction did not work: {str(e)}"
     # return just a string with all the text from the file
     return text
 
 
 def clean_text(text):
-
     text = text.lower()
 
     char_list = [
@@ -183,7 +182,7 @@ keep the other charicters that i need to identify where a dot is placed.
 """
 
 
-def countchar(text, maxchar, charlist=[" ", ".","?"]):
+def countchar(text, maxchar, charlist=[" ", ".", "?"]):
     if len(text) < maxchar:
         max = len(text)
     else:
@@ -195,11 +194,11 @@ def countchar(text, maxchar, charlist=[" ", ".","?"]):
     while i < len(text) and alphachar < maxchar:
         character = text[i]
         if character.isalpha():
-            #increase the char count and alpha count
+            # increase the char count and alpha count
             count += 1
             alphachar += 1
         elif character in charlist:
-            #just increase the char count since its not an alpha
+            # just increase the char count since its not an alpha
             count += 1
         elif character.isnumeric():
             print(f"Error: character {i} was identified as a number: {character}")
@@ -209,19 +208,21 @@ def countchar(text, maxchar, charlist=[" ", ".","?"]):
                 f"{character} is not identified as a possible character to analyze. \nPlease remove character at position {i}"
             )
             return False
-        i += 1 #increase the value of i at the end of every test. 
+        i += 1  # increase the value of i at the end of every test.
 
     return count
 
-#keeping for future use.
+
+# keeping for future use.
 def replace_char_with_string(original_string, index1, index2, new_string):
     # Slice the original string and concatenate with the new string
     new_string = original_string[:index1] + new_string + original_string[index2:]
     return new_string
 
-'''
+
+"""
 # Usage
 text = "Hello, World!"
 text = replace_char_with_string(text, 7, "Wonderful")
 print(text)  # Outputs: "Hello, Wonderfulorld!"
-'''
+"""

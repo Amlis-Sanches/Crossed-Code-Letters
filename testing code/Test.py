@@ -16,6 +16,7 @@ t2 = 'A10 20 B20bb'
 
 #for extract_tect()
 file_path = r'C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\File Examples\pytest.txt'
+file_path2 = r'C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\File Examples\pytest_word.docx'
 
 def test_countchar():
     assert tf.countchar(text1, 18) == 26
@@ -36,4 +37,5 @@ def test_goup_text():
 
 def test_extract_text():
     assert tf.extract_text(file_path) == 'this is a test'
+    assert tf.extract_text(file_path2) == 'This is also a test '
 
