@@ -156,20 +156,24 @@ def clean_text(text):
     return text
 
 
-def group_text(text):
-    location = countchar(text, 80)
+#! Last function to review and fix !#
+def group_text(text, charw = 80, lines = 30):
+    location = countchar(text, charw)
     # using the determined number of characters, insert a new line after that character.
-    for i in range(0, len(text), location):
+
+    for i in range(0, len(text), location if location != 0 else exit('group_text function for loop')):
         # rest of your code
-        location = countchar(text, 80)
-        grouptext = text[:i] + "\n" + text[i:]
+        location = countchar(text, charw)
+        grouptext = replace_char_with_string(text, i, i, '\n')
 
     # Count the total number of lines and determine how many images will be processed
     total_lines = len(text.split("\n"))
+
     # split lines after you reach 32 lines so the \n fits the image
     Image_character_length = (
-        30  # Set to a specific length so the character length is 80W by 30L
+        lines  # Set to a specific length so the character length is 80W by 30L
     )
+    
     total_image = round(total_lines // (Image_character_length * 2))
 
     # create a red and blue list to hold the text
@@ -232,3 +236,6 @@ def replace_char_with_string(original_string, index1, index2, new_string):
     new_string = original_string[:index1] + new_string + original_string[index2:]
     return new_string
 
+def exit(location = 'Undefined'):
+    print(f'Error Produced at {location}. Exiting code')
+    sys.exit()
