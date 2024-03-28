@@ -103,18 +103,12 @@ def clean_text(text):
         "}",
         "/",
         "\\",
-        "&",
         "*",
         "#",
         "@",
         "^",
-        "%",
         "$",
-        "<",
-        ">",
         "|",
-        "+",
-        "=",
         '"',
         "“",
         "”",
@@ -126,6 +120,20 @@ def clean_text(text):
     ]  # List of characters to remove
     for char in char_list:
         text = text.replace(char, "")
+    
+    '''
+    this is to review all the numbers in the string and change them to numbers. If a number is larger than 1 character long
+    it will be able to identify what number it is. 
+    '''
+    replace_dic = {
+        '%':'percent',
+        '&':'and',
+        '=':'equal',
+        '+':'plus',
+        '-':'minus',
+        '<':'less than',
+        '>':'greater than',
+        }
 
     i = 0
     while i < len(text):
@@ -135,7 +143,7 @@ def clean_text(text):
                 j += 1
             number = int(text[i:j])
             word = num2words(number)
-            text = text[:i] + word + text[j:]
+            text = replace_char_with_string(text, i, j, word)
             i += len(word)
         else:
             i += 1
@@ -213,16 +221,9 @@ def countchar(text, maxchar, charlist=[" ", ".", "?"]):
     return count
 
 
-# keeping for future use.
+# keeping for future use. if needing to replace specific items it will help out a lot. 
 def replace_char_with_string(original_string, index1, index2, new_string):
     # Slice the original string and concatenate with the new string
     new_string = original_string[:index1] + new_string + original_string[index2:]
     return new_string
 
-
-"""
-# Usage
-text = "Hello, World!"
-text = replace_char_with_string(text, 7, "Wonderful")
-print(text)  # Outputs: "Hello, Wonderfulorld!"
-"""
