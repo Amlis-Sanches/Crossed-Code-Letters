@@ -199,7 +199,7 @@ keep the other charicters that i need to identify where a dot is placed.
 """
 
 
-def countchar(text, maxchar, charlist=[" ", ".", "?"]):
+def countchar(text, maxchar, charlist=[" ", ".", "?", ""]):
     if len(text) < maxchar:
         max = len(text)
     else:
@@ -208,20 +208,28 @@ def countchar(text, maxchar, charlist=[" ", ".", "?"]):
     alphachar = 0
     count = 0
     i = 0
+
     while i < len(text) and alphachar < maxchar:
         character = text[i]
+
         if character.isalpha():
             # increase the char count and alpha count
             count += 1
             alphachar += 1
+
         elif character in charlist:
             # just increase the char count since its not an alpha
             count += 1
+
         elif character.isnumeric():
             print(f"Error: character {i} was identified as a number: {character}")
             return False
+        
+        elif character == '\n':
+            count += 1
+
         else:
-            print(
+            exit(
                 f"{character} is not identified as a possible character to analyze. \nPlease remove character at position {i}"
             )
             return False
@@ -237,5 +245,5 @@ def replace_char_with_string(original_string, index1, index2, new_string):
     return new_string
 
 def exit(location = 'Undefined'):
-    print(f'Error Produced at {location}. Exiting code')
+    print(f'Error {location}. Exiting code')
     sys.exit()
