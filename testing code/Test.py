@@ -9,6 +9,8 @@ text3 = 'Hello1  yes2'
 text4 = 'no its % not percent'
 
 #for clean_text()
+t1 = 'A1 2 B3B'
+t2 = 'A10 20 B20bb'
 
 #for extract_tect()
 
@@ -23,7 +25,9 @@ def test_countchar():
 
 
 def test_clean_text():
-    assert tf.text_clean(text3) == 'Helloone  yestwo'
+    assert tf.clean_text(t1) == 'aone two bthreeb'
+    assert tf.clean_text(t2) == 'aten twenty btwentybb'
+
 
 def test_goup_text():
     ...

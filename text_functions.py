@@ -89,6 +89,9 @@ def extract_text(file_path):
 
 
 def clean_text(text):
+
+    text = text.lower()
+
     char_list = [
         ",",
         ".",
