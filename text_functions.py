@@ -216,6 +216,7 @@ def countchar(text, maxchar, charlist=[" ", ".","?"]):
 
     return count
 
+#keeping for future use.
 def replace_char_with_string(original_string, index1, index2, new_string):
     # Slice the original string and concatenate with the new string
     new_string = original_string[:index1] + new_string + original_string[index2:]
