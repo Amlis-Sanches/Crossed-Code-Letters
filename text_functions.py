@@ -108,35 +108,17 @@ def text_clean(text):
     for char in char_list:
         cleaned_text = text.replace(char, "")
 
-    location = countchar(cleaned_text, 80)
+
+def group_text(text):
+    location = countchar(text, 80)
     # using the determined number of characters, insert a new line after that character.
-    for i in range(0, len(cleaned_text), location):
+    for i in range(0, len(text), location):
         # rest of your code
-        location = countchar(cleaned_text, 80)
-        grouptext = cleaned_text[:i] + "\n" + cleaned_text[i:]
-
-        """ Removed from code since this is fixed with the function countchar
-        if i + 1 < len(cleaned_text):  # Ensure i+1 is a valid index
-            if cleaned_text[i] in ' .,?!:;':
-                cleaned_text = cleaned_text[:i] + '\n' + cleaned_text[i:]
-            elif cleaned_text[i].isalpha() and cleaned_text[i+1] in " .,?!:;":
-                cleaned_text = cleaned_text[:i+1] + '\n' + cleaned_text[i+1:]
-            else:
-                cleaned_text = cleaned_text[:i] + '\n' + cleaned_text[i:]
-        """
-
-    """ Can remove since the length of 80 count is needed since we identify alphanumeric caracters
-    # Check if the last line is longer than 80 characters
-    last_newline = cleaned_text.rfind('\n')
-    if len(cleaned_text) - last_newline > 80:
-        for j in range(len(cleaned_text), last_newline, -1):
-            if cleaned_text[j] == ' ':
-                cleaned_text = cleaned_text[:j] + '\n' + cleaned_text[j+1:]
-                break  # Exit the loop once a space is found
-    """
+        location = countchar(text, 80)
+        grouptext = text[:i] + "\n" + text[i:]
 
     # Count the total number of lines and determine how many images will be processed
-    total_lines = len(cleaned_text.split("\n"))
+    total_lines = len(text.split("\n"))
     # split lines after you reach 32 lines so the \n fits the image
     Image_character_length = (
         30  # Set to a specific length so the character length is 80W by 30L
@@ -148,14 +130,14 @@ def text_clean(text):
     blue_list = [""] * total_image
     red_list = [""] * total_image
 
-    cleaned_text_lines = cleaned_text.split("\n")
+    text_lines = text.split("\n")
     counter = 0
-    for i in range(0, len(cleaned_text_lines), (Image_character_length * 2)):
+    for i in range(0, len(text_lines), (Image_character_length * 2)):
         if i % Image_character_length == 0:
-            blue_list[counter] = "\n".join(cleaned_text_lines[:Image_character_length])
-            red_list[counter] = "\n".join(cleaned_text_lines[Image_character_length:])
+            blue_list[counter] = "\n".join(text_lines[:Image_character_length])
+            red_list[counter] = "\n".join(text_lines[Image_character_length:])
             counter += 1
-        cleaned_text_lines = cleaned_text_lines[(Image_character_length * 2) :]
+        text_lines = text_lines[(Image_character_length * 2) :]
     return blue_list, red_list, total_image
 
 
