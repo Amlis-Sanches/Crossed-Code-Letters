@@ -66,24 +66,21 @@ def extract_text(file_path):
         match = re.search(r"\.(\w+)$", file_path)
         file_type = match.group(1) if match else None
 
-        match file_type:
-            case "txt":
-                with open(file_path, "r") as file:
-                    text = file.read()
-
-            case "docx":
-                doc = docx.Document(file_path)
-                full_text = []
-                for para in doc.paragraphs:
-                    full_text.append(para.text)
-                text = "\n".join(full_text)
-
-            case _:
-                print("Program Error, unadentified document type. Please try again.")
-                sys.exit()
-    except:
-        print("Error! Document unable to be processed")
-        sys.exit()
+        if file_type == "txt":
+            with open(file_path, "r") as file:
+                text = file.read()
+        elif file_type == "docx":
+            doc = docx.Document(file_path)
+            full_text = []
+            for para in doc.paragraphs:
+                full_text.append(para.text)
+            text = "\n".join(full_text)
+        else:
+            return False
+    except FileNotFoundError:
+        return 'File not found'
+    except Exception as e:
+        return f'Extraction did not work: {str(e)}'
     # return just a string with all the text from the file
     return text
 
