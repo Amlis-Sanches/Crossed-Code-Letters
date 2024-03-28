@@ -145,6 +145,9 @@ def clean_text(text):
             word = num2words(number)
             text = replace_char_with_string(text, i, j, word)
             i += len(word)
+        if text[i] in replace_dic:
+            word = replace_dic[text[i]]
+            text = replace_char_with_string(text,i, i+1, word)
         else:
             i += 1
 
