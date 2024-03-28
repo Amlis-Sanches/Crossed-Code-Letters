@@ -12,6 +12,8 @@ text4 = 'no its % not percent'
 t1 = 'A1 2 B3B'
 t2 = 'A10 20 B20bb'
 
+#for group_text()
+
 #for extract_tect()
 file_path = r'C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\File Examples\pytest.txt'
 
