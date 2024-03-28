@@ -48,7 +48,7 @@ ensure the text is suitable for the intended visual presentation format.
 import math
 import docx
 import re
-import num2words
+from num2words import num2words
 import sys
 import pandas as pd
 
@@ -56,7 +56,7 @@ import pandas as pd
 def main():
     file_path = r'C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\File Examples\Story_example.txt'
     text = extract_text(file_path)
-    text = text_clean(text)
+    text = clean_text(text)
     blue_list, red_list, num_of_images = group_text(text)
 
 
