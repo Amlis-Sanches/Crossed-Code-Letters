@@ -56,7 +56,8 @@ import pandas as pd
 def main():
     file_path = r'C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\File Examples\Story_example.txt'
     text = extract_text(file_path)
-    blue_list, red_list, num_of_images = text_clean(text)
+    text = text_clean(text)
+    blue_list, red_list, num_of_images = group_text(text)
 
 
 def extract_text(file_path):
@@ -88,9 +89,6 @@ def extract_text(file_path):
 
 
 def text_clean(text):
-    # Convert all numbers into words. Do this first to reduce glitches
-    text = re.sub(r"\b\d+\b", lambda x: num2words(int(x.group())), text)
-
     # remove all new lines and tabs
     char_list = [
         "\n",
@@ -107,6 +105,20 @@ def text_clean(text):
     ]  # List of characters to remove
     for char in char_list:
         cleaned_text = text.replace(char, "")
+
+    for i in range(len(text_clean)):
+        if text_clean[i].isnumeric():
+            j = i + 1
+            for j in range(len(text_clean)):
+                if j == (i + 1) and text_clean[j].isalpha():
+                    word = num2words(text_clean[i])
+                    cleaned_text = replace_char_with_string(text_clean, i, i+1, word)
+                elif text_clean[j].isalpha():
+                    number = text_clean[i:j-1]
+                    word = num2words(number)
+                    cleaned_text = replace_char_with_string(text_clean, i, j, word)
+
+    return cleaned_text
 
 
 def group_text(text):
@@ -177,3 +189,15 @@ def countchar(text, maxchar, charlist=[" ", ".","?"]):
         i += 1 #increase the value of i at the end of every test. 
 
     return count
+
+def replace_char_with_string(original_string, index1, index2, new_string):
+    # Slice the original string and concatenate with the new string
+    new_string = original_string[:index1] + new_string + original_string[index2:]
+    return new_string
+
+'''
+# Usage
+text = "Hello, World!"
+text = replace_char_with_string(text, 7, "Wonderful")
+print(text)  # Outputs: "Hello, Wonderfulorld!"
+'''
