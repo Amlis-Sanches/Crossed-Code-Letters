@@ -30,7 +30,7 @@ def test_countchar():
 def test_clean_text():
     assert tf.clean_text(t1) == 'aone two bthreeb'
     assert tf.clean_text(t2) == 'aten twenty btwentybb'
-
+    assert tf.clean_text(text4) == 'no its percent not percent'
 
 def test_goup_text():
     ...
