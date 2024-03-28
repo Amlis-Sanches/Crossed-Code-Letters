@@ -245,5 +245,5 @@ def replace_char_with_string(original_string, index1, index2, new_string):
     return new_string
 
 def exit(location = 'Undefined'):
-    print(f'Error {location}. Exiting code')
+    print(f'Error: {location}. Exiting code')
     sys.exit()
