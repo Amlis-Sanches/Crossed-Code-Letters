@@ -1,3 +1,4 @@
+'''
 def combine_letter(text1, text2, i, j):
 
     '''
@@ -60,35 +61,35 @@ def combine_letter(text1, text2, i, j):
             r_sentance = False
     
     return B_letter, R_letter, B_word, R_word, b_sentance, r_sentance, i, j
+'''
 
-def combine_letter_in_line (blue_line, red_line):
-    
-    #identify blue letter
-    #identify red letter
-    #combine the letters
-    #determine if there is a space or period after letter
-        #if there is a space or period, then it will be a word or sentance and increase blue or red charater coun\t
+def combine_letter_in_line(blue_line, red_line):
     
     list_of_letters = []
     for i in range(len(blue_line)):
         for j in range(len(red_line)):
-            bchar = blue_line[i]
-            rchar = red_line[j]
-
-            if bchar.isalpha() and not rchar.isalpha():
-                j += 1
-                rchar = red_line[j]
-            elif not bchar.isalpha() and rchar.isalpha():
-                i += 1
-                bchar = blue_line[i]
-            elif not bchar.isalpha() and not rchar.isalpha():
-                i += 1
-                j += 1
-                bchar = blue_line[i]
-                rchar = red_line[j]
-
+            bchar, bc = char_find(blue_line, i)
+            rchar, rc = char_find(red_line, j)
             
+            while not bc or not rc: #*while both are not true
+                #? check to make sure that the characters are a letter. 
+                match (bc, rc):
+                    case (False, True):  # for Blue
+                        i += 1
+                        bchar, bc = char_find(blue_line, i)
 
-    
+                    case (True, False):  # for Red
+                        j += 1
+                        rchar, rc = char_find(red_line, j)
+
+                    case (False, False):  # for Both
+                        i += 1
+                        j += 1
+                        bchar, bc = char_find(blue_line, i)
+                        rchar, rc = char_find(red_line, j)
+
     return list_of_letters
     
+def char_find(text, i):
+    char, c = text[i], text[i].isalpha()
+    return char, c
