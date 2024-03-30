@@ -1,28 +1,3 @@
-
-# Import necessary libraries
-import docx
-import math
-import pandas as pd
-from PIL import Image, ImageDraw, ImageFont, ImageChops
-import text_functions as tf
-
-'''
-Main function to handle the workflow.
-'''
-
-def main():
-    file_path = input("Enter the file path: ") #get file path from user
-    text = tf.extract_text(file_path) #use extraction function from the text_clean
-    textCleaned = tf.clean_text(text) #Clean the text to remove unwanted items. 
-    blue_list, red_list, num_of_images = tf.group_text(textCleaned) # !! determine how to operate !!#
-
-    # Generate crossed letter
-    for i in range(num_of_images):
-        combine_letter(blue_list[i], red_list[i], i)
-    
-    print("Crossed Letter Generated!")
-
-
 def combine_letter(text1, text2, i, j):
 
     '''
@@ -49,9 +24,6 @@ def combine_letter(text1, text2, i, j):
             R_letter = text2[j]
 
     '''
-    Unique characters in a scentance will have a different symbol list.
-    '''
-    '''
     for character in [" ", ",", ";", "-", "'", '"', "_"]:
         if text1[i] == character and text2[j] == character:
             B_word = True
@@ -68,9 +40,6 @@ def combine_letter(text1, text2, i, j):
         else:
             B_word = False
             R_word = False
-    '''
-    '''
-    Create a sybmol identification for scentences. Identifying characters that end a sentance.
     '''
 
     for character in [".", "?", "!"]:
@@ -92,7 +61,34 @@ def combine_letter(text1, text2, i, j):
     
     return B_letter, R_letter, B_word, R_word, b_sentance, r_sentance, i, j
 
+def combine_letter_in_line (blue_line, red_line):
+    
+    #identify blue letter
+    #identify red letter
+    #combine the letters
+    #determine if there is a space or period after letter
+        #if there is a space or period, then it will be a word or sentance and increase blue or red charater coun\t
+    
+    list_of_letters = []
+    for i in range(len(blue_line)):
+        for j in range(len(red_line)):
+            bchar = blue_line[i]
+            rchar = red_line[j]
 
+            if bchar.isalpha() and not rchar.isalpha():
+                j += 1
+                rchar = red_line[j]
+            elif not bchar.isalpha() and rchar.isalpha():
+                i += 1
+                bchar = blue_line[i]
+            elif not bchar.isalpha() and not rchar.isalpha():
+                i += 1
+                j += 1
+                bchar = blue_line[i]
+                rchar = red_line[j]
 
-if __name__ == "__main__":
-    main()
+            
+
+    
+    return list_of_letters
+    
