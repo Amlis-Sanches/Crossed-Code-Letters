@@ -63,8 +63,9 @@ def combine_letter(text1, text2, i, j):
     return B_letter, R_letter, B_word, R_word, b_sentance, r_sentance, i, j
 '''
 
+#! IDK why this def is having a fit!#
 def combine_letter_in_line(blue_line, red_line):
-    
+
     list_of_letters = []
     for i in range(len(blue_line)):
         for j in range(len(red_line)):
