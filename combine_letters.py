@@ -89,11 +89,31 @@ def combine_letter_in_line(blue_line, red_line):
                         rchar, rc = char_find(red_line, j)
 
             #TODO check if there is a space or a period+ icon and identify the end of a sentance for both red and blue
-                        
+            z, k = i + 1, j + 1
+            B = blue_line[z]
+            R = red_line[k]
+
+            variables = {'B': {}, 'R': {}}
+            for next_char in [('B', blue_line[z]), ('R', red_line[k])]:
+                name, char = next_char
+                match char:
+                    case '.'|'!'|'?':
+                        variables[name]['sentence'] = True
+                        variables[name]['word'] = True
+                    case ' ':
+                        variables[name]['sentence'] = False
+                        variables[name]['word'] = True
+                    case _ :
+                        variables[name]['sentence'] = False
+                        variables[name]['word'] = False
+                   
+                    '''
+                    print(variables['B']['sentence'])  # Prints the value of Bsentence
+                    print(variables['R']['word'])  # Prints the value of Rword
+                    '''
+                    
             #TODO store the information for one item into a list for the output. 
             
-
-
     return list_of_letters
     
 def char_find(text, i):
