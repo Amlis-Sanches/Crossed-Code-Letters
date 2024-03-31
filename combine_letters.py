@@ -63,7 +63,6 @@ def combine_letter(text1, text2, i, j):
     return B_letter, R_letter, B_word, R_word, b_sentance, r_sentance, i, j
 '''
 
-#! IDK why this def is having a fit!#
 def combine_letter_in_line(blue_line, red_line):
 
     list_of_letters = []
@@ -72,8 +71,8 @@ def combine_letter_in_line(blue_line, red_line):
             bchar, bc = char_find(blue_line, i)
             rchar, rc = char_find(red_line, j)
             
+            #* check if the characters are letters
             while not bc or not rc: #*while both are not true
-                #? check to make sure that the characters are a letter. 
                 match (bc, rc):
                     case (False, True):  # for Blue
                         i += 1
@@ -88,6 +87,12 @@ def combine_letter_in_line(blue_line, red_line):
                         j += 1
                         bchar, bc = char_find(blue_line, i)
                         rchar, rc = char_find(red_line, j)
+
+            #TODO check if there is a space or a period+ icon and identify the end of a sentance for both red and blue
+                        
+            #TODO store the information for one item into a list for the output. 
+            
+
 
     return list_of_letters
     
