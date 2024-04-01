@@ -20,9 +20,11 @@ def list_directory(directory):
         for name in file_names:
             writer.writerow([name])
 
-def check_directory(directory, file_list):
+def check_directory(directory):
     # Get a list of all file names in the directory
     directory_files = os.listdir(directory)
+    file_list = read_csv_to_list(csv_file_path)
+
 
     # Sort both lists before comparing
     directory_files.sort()
@@ -33,6 +35,13 @@ def check_directory(directory, file_list):
         return True
     else:
         return False
+
+
+def read_csv_to_list(csv_file_path):
+    with open(csv_file_path, 'r', newline='') as file:
+        reader = csv.reader(file)
+        return [row[0] for row in reader]
+
 
 
 if __name__ == '__main__':
