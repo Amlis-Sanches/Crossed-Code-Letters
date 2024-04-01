@@ -1,5 +1,6 @@
 import os
 import csv
+import sys
 
 # Specify the directory you want to scan
 directory = r'C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\Photos Generated'
@@ -23,4 +24,10 @@ def check_directory(directory):
 
 
 if __name__ == '__main__':
-    list_directory(directory)
+    if sys.argv[1] == 'list':
+        list_directory(directory)
+    elif sys.argv[1] == 'check':
+        print(check_directory(directory))
+    else:
+        print('Invalid command. Need aditional argument after text.py document. EX: python text.py list or python text.py check')
+        sys.exit()
