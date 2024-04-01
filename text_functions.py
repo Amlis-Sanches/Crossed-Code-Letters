@@ -104,8 +104,6 @@ def clean_text(text):
         "/",
         "\\",
         "*",
-        "#",
-        "@",
         "^",
         "$",
         "|",
@@ -135,6 +133,8 @@ def clean_text(text):
         '-':'minus',
         '<':'less than',
         '>':'greater than',
+        '#':'number',
+        '@':'at',
         }
 
     i = 0
@@ -309,6 +309,7 @@ def replace_char_with_string(original_string, index1, index2, new_string):
     # Slice the original string and concatenate with the new string
     new_string = original_string[:index1] + new_string + original_string[index2:]
     return new_string
+
 
 def exit(location = 'Undefined'):
     print(f'Error: {location}. Exiting code')
