@@ -12,7 +12,6 @@ def main():
     # Letters list to iterate through every letter of the alphabet.
     letters = list("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
-    '''This is replaced with the bellow code. 
     for letterB in letters:
         for letterR in letters:
             for b_suffix in [False, True]:
@@ -34,26 +33,6 @@ def main():
 
                             # Save the image
                             img.save(filepath)
-    '''
-
-    # Define the relative path to the 'Symbols Images' directory
-    images_dir = os.path.join('Crossed-Code-Letters', 'Symbols Images')
-
-    # Make sure the directory exists
-    os.makedirs(images_dir, exist_ok=True)
-
-    for letterB, letterR, b_suffix, r_suffix, b_sentance, r_sentance in itertools.product(letters, repeat=2, [False, True], repeat=4):
-        # Generate the image
-        img = image_gen(image_width, image_height, letterB, letterR, font, b_suffix, r_suffix, b_sentance, r_sentance)
-
-        # Define the filename
-        filename = f"{letterB}{letterR}-{b_suffix}-{r_suffix}-{b_sentance}-{r_sentance}.png"
-
-        # Join the directory path and filename
-        filepath = os.path.join(images_dir, filename)
-
-        # Save the image
-        img.save(filepath)
 
 def image_gen(image_width, image_height, letterB, letterR, font, PB = False, PR = False, SB = False, SR = False):
     '''
