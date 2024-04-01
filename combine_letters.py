@@ -62,10 +62,11 @@ def combine_letter(text1, text2, i, j):
     
     return B_letter, R_letter, B_word, R_word, b_sentance, r_sentance, i, j
 '''
-
+#! Split this function into two functions and prep for testing!#
 def combine_letter_in_line(blue_line, red_line):
 
     list_of_letters = []
+    
     for i in range(len(blue_line)):
         for j in range(len(red_line)):
             bchar, bc = char_find(blue_line, i)
@@ -89,6 +90,8 @@ def combine_letter_in_line(blue_line, red_line):
                         rchar, rc = char_find(red_line, j)
 
             #TODO check if there is a space or a period+ icon and identify the end of a sentance for both red and blue
+            #TODO store the information for one item into a list for the output
+            
             z, k = i + 1, j + 1
             B = blue_line[z]
             R = red_line[k]
@@ -106,15 +109,14 @@ def combine_letter_in_line(blue_line, red_line):
                     case _ :
                         variables[name]['sentence'] = False
                         variables[name]['word'] = False
-                   
-                    '''
-                    print(variables['B']['sentence'])  # Prints the value of Bsentence
-                    print(variables['R']['word'])  # Prints the value of Rword
-                    '''
-                    
-            #TODO store the information for one item into a list for the output. 
+                
+                
+                ''' Example code as a note for the future
+                print(variables['B']['sentence'])  # Prints the value of Bsentence
+                print(variables['R']['word'])  # Prints the value of Rword
+                '''
             
-    return list_of_letters
+    return variables
     
 def char_find(text, i):
     char, c = text[i], text[i].isalpha()
