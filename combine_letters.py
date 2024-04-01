@@ -29,7 +29,6 @@ def combine_letter_in_line(blue_line, red_line):
                         variables[name]['sentence'] = False
                         variables[name]['word'] = False
                 
-                
                 ''' Example code as a note for the future
                 print(variables['B']['sentence'])  # Prints the value of Bsentence
                 print(variables['R']['word'])  # Prints the value of Rword
