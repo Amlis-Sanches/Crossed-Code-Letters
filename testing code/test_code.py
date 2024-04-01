@@ -1,4 +1,4 @@
-from code_text import combine_letter
+from coded_image_generator import combine_letter
 
 text1 = "Hello World."
 text2 = "I am nathan."
