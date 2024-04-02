@@ -14,6 +14,8 @@ import Symbols_Generator as sg
 '''
 Section to check and make sure the images are in tact and not missing. 
 If missing it will generate the needed items prior to running code.
+Wanted to do this prior to the start of the code to reduce the amount 
+of errors that could occur.
 '''
 check = sc.check_directory()
 if check == False:

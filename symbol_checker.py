@@ -3,12 +3,12 @@ import csv
 import sys
 
 # Specify the directory you want to scan
-directory = r'C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\Symbols Images'
+default_directory = r'C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\Symbols Images'
 
 # Specify a full path for the CSV file
 csv_file_path = r'C:\Users\natha\Documents\GitHub\Crossed-Code-Letters\Directory.csv'
 
-def list_directory(directory):
+def list_directory(directory = default_directory):
     # Get a list of all file names in the directory
     file_names = os.listdir(directory)
 
@@ -20,7 +20,7 @@ def list_directory(directory):
         for name in file_names:
             writer.writerow([name])
 
-def check_directory(directory):
+def check_directory(directory = default_directory):
     # Get a list of all file names in the directory
     directory_files = os.listdir(directory)
     file_list = read_csv_to_list(csv_file_path)
@@ -50,10 +50,10 @@ if __name__ == '__main__':
             list_directory(directory)
             print(f'directory list created. Location: {read_csv_to_list}')
         elif sys.argv[1] == 'check':
-            print(f'The files were reviewed and found to be {check_directory(directory)}.')  # Outputs: True or False
+            print(f'The files were reviewed and the directory being in contact was found to be {check_directory(directory)}.')  # Outputs: True or False
         else:
-            print('Invalid command. Need additional argument after script name. EX: python script.py list or python script.py check')
+            print('Invalid command. Additional argument after script name needs to be list or check. EX: python script.py list or python script.py check')
             sys.exit()
-else:
-    print("No command provided.")
-    sys.exit()
+    else:
+        print("No command provided. Need additional argument after script name. EX: python script.py list or python script.py check")
+        sys.exit()
