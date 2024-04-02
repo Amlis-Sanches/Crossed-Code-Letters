@@ -45,6 +45,7 @@ an image's dimensions, specifically targeting a dimension that can accommodate 3
 - Custom error messages are implemented to guide users through resolving issues with non-alphanumeric characters and to 
 ensure the text is suitable for the intended visual presentation format.
 """
+
 import math
 import docx
 import re
